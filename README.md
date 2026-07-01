@@ -18,7 +18,7 @@
 
 A lightweight Odoo module that displays a **configurable diagonal ribbon** in the corner of the backend to clearly identify non-production instances (TEST, DEV, STAGING, etc.).
 
-Unlike other ribbon modules, PNS Ribbon is **immune to Odoo frontend changes** between versions — it injects vanilla JS/CSS directly into the `<head>`, bypassing the asset bundler entirely. One codebase works from Odoo 13 to 19+ with zero modifications.
+Unlike other ribbon modules, PNS Ribbon is **immune to Odoo frontend changes** between versions — it injects vanilla JS/CSS directly into the `<head>`, bypassing the asset bundler entirely.
 
 <p align="center">
   <img src="static/description/ribbon_dialog.png" alt="Configuration wizard" width="600"/>
@@ -39,38 +39,33 @@ Unlike other ribbon modules, PNS Ribbon is **immune to Odoo frontend changes** b
 
 ## 📦 Installation
 
-### Standard (single Odoo version)
+Each branch in this repository contains a **ready-to-install module** for a specific Odoo version. Pick the branch that matches your Odoo:
 
-1. Copy the module folder for your Odoo version into your addons path:
+| Odoo version | Branch |
+|:---|:---|
+| 13 | `13.0` |
+| 14 | `14.0` |
+| 15 | `15.0` |
+| 16 | `16.0` |
+| 17 | `17.0` |
+| 18 | `18.0` |
+| 19+ | `19.0` |
 
-   | Odoo version | Stack directory |
-   |:---|:---|
-   | 13 – 14 | `stacks/owl1/pns_ribbon/` |
-   | 15 – 19+ | `stacks/owl2/pns_ribbon/` |
-
-2. Copy the **common files** on top (they provide data and static assets shared by both stacks):
-
-   ```
-   # Copy common/ contents into the same pns_ribbon/ directory
-   cp -r common/* <your_addons_path>/pns_ribbon/
-   ```
-
-3. Update the app list and install **PNS Ribbon** from *Settings > Apps*.
-
-### Quick Example (Odoo 17)
+### Option A: git clone (recommended)
 
 ```bash
-# Clone the repo
-git clone https://github.com/patanegrasoft/pns_ribbon.git /tmp/pns_ribbon
+# Clone the branch for your Odoo version (example: Odoo 17):
+git clone -b 17.0 https://github.com/patanegra/pns_ribbon.git /path/to/addons/pns_ribbon
 
-# Copy the right stack
-cp -r /tmp/pns_ribbon/stacks/owl2/pns_ribbon /path/to/addons/
-
-# Overlay common files
-cp -r /tmp/pns_ribbon/common/* /path/to/addons/pns_ribbon/
-
-# Restart Odoo and install
+# Restart Odoo, update the app list, and install PNS Ribbon from Settings > Apps.
 ```
+
+### Option B: Download ZIP
+
+1. On this page, select your Odoo version from the **branch dropdown** (top-left).
+2. Click **Code → Download ZIP**.
+3. Extract into your Odoo addons path.
+4. Restart Odoo and install from *Settings > Apps*.
 
 ## ⚙️ Configuration
 
@@ -109,25 +104,8 @@ The module is designed to be **version-proof**:
 
 - **Ribbon injection** — inherits `web.layout` and injects a `<script>` + `<link>` into `<head>`. `ribbon.js` (vanilla IIFE, no framework) creates a `<div id="pns-ribbon">` at runtime. `ribbon.css` styles it.
 - **Data delivery** — server-rendered `window.pns_ribbon_data` object in the `<head>`, no RPC calls needed.
-- **Config wizard** — a plain `TransientModel` form with `onchange` preview. The only version-specific piece is the color picker widget (`owl1` uses `AbstractField`, `owl2` uses an OWL `Component`).
+- **Config wizard** — a plain `TransientModel` form with `onchange` preview.
 - **Cache-busting** — static files are loaded with `?v=<module_version>` to force browser refresh after upgrades.
-
-### Project layout
-
-```
-pns_ribbon/
-├── common/                     # Shared across all Odoo versions
-│   ├── LICENSE                 # Apache 2.0
-│   ├── data/parameters.xml     # Default system parameters (noupdate)
-│   └── static/description/     # Module icon
-├── stacks/
-│   ├── owl1/pns_ribbon/        # Odoo 13-14 (legacy widgets)
-│   └── owl2/pns_ribbon/        # Odoo 15-19+ (OWL components)
-├── docs/img/                   # Screenshots
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-└── README.md
-```
 
 ## 🔄 Migrating from `web_environment_ribbon` (OCA)
 
