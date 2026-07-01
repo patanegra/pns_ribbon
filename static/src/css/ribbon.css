@@ -1,0 +1,27 @@
+/* Floating environment indicator ribbon.
+ *
+ * Styled as a fixed diagonal banner in the top-left corner.
+ * The colors defined here are defaults — they are overridden at runtime
+ * by ``ribbon.js`` using values from ``ir.config_parameter``.
+ */
+#pns-ribbon {
+    position: fixed;
+    top: 55px;
+    inset-inline-start: -90px;
+    width: 350px;
+    padding: 10px 0 5px 0;
+    transform: rotate(-45deg);
+    font-size: 15px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    z-index: 9999999;
+    pointer-events: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    letter-spacing: 3px;
+    text-align: center;
+    border: 1px dashed rgba(255,255,255,0.4);
+    
+    /* Default colors (classic Odoo-style red). */
+    background-color: rgba(192, 57, 43, 0.5);
+    color: white;
+}
