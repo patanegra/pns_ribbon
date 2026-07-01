@@ -8,7 +8,7 @@
 Lightweight module that shows a configurable ribbon/banner in the corner
 to clearly identify non-production instances (TEST/DEV).
 
-Works on all Odoo versions (14-19+).
+Works on all Odoo versions (13-19+).
 
 Where to configure (administrators only):
 Settings > Technical > Ribbon
