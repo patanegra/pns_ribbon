@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- noupdate="1": the <function> calls only run on INSTALL (mode 'init'),
+         never on update — this preserves the admin's configuration.
+         We use set_param (upsert by 'key') instead of <record> (direct INSERT)
+         so installation is idempotent and does NOT conflict with the unique
+         constraint ir_config_parameter_key_uniq if the module is reinstalled
+         on a database that already had these parameters. -->
+    <data noupdate="1">
+        <!-- Ribbon text ({dbname} = database name). -->
+        <function model="ir.config_parameter" name="set_param">
+            <value>pns_ribbon.html</value>
+            <value>TEST&lt;br&gt;{dbname}</value>
+        </function>
+        <function model="ir.config_parameter" name="set_param">
+            <value>pns_ribbon.textColor</value>
+            <value>#FFFFFF</value>
+        </function>
+        <function model="ir.config_parameter" name="set_param">
+            <value>pns_ribbon.backgroundColor</value>
+            <value>rgba(255, 0, 0, 0.5)</value>
+        </function>
+        <!-- Master switch: '0' keeps the module installed but invisible. -->
+        <function model="ir.config_parameter" name="set_param">
+            <value>pns_ribbon.enabled</value>
+            <value>1</value>
+        </function>
+        <!-- Shadow (cosmetic): '0' removes it for a flatter ribbon. -->
+        <function model="ir.config_parameter" name="set_param">
+            <value>pns_ribbon.shadow</value>
+            <value>1</value>
+        </function>
+    </data>
+</odoo>

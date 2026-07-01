@@ -1,0 +1,112 @@
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color: #875A7B;">PNS Ribbon</h2>
+        <h3 class="oe_slogan">Never confuse production with staging again.</h3>
+        <div class="oe_demo oe_screenshot" style="text-align: center; margin: 24px 0;">
+            <img src="ribbon_dialog.png" alt="Configuration wizard" style="max-width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h3>A lightweight, version-proof environment indicator for Odoo 13–19+</h3>
+        <p>
+            Displays a <strong>configurable diagonal ribbon</strong> in the corner of
+            every backend page to clearly identify non-production instances
+            (TEST, DEV, STAGING, etc.).
+        </p>
+        <p>
+            Unlike other ribbon modules, PNS Ribbon is <strong>immune to Odoo frontend
+            changes</strong> between versions — it injects vanilla JS/CSS directly into
+            the <code>&lt;head&gt;</code>, bypassing the asset bundler entirely.
+        </p>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h3>Features</h3>
+        <div class="oe_span6">
+            <ul>
+                <li>🎨 <strong>Color picker + opacity slider</strong> — native picker with pasteable <code>rgba(...)</code> field</li>
+                <li>👁️ <strong>Live preview</strong> — see the final look before saving</li>
+                <li>📋 <strong>History grid</strong> — last 20 color combinations, one click to reuse</li>
+                <li>⚙️ <strong>On/off switch</strong> — hide without uninstalling</li>
+            </ul>
+        </div>
+        <div class="oe_span6">
+            <ul>
+                <li>🎭 <strong>Shadow toggle</strong> — flat or shadowed look</li>
+                <li>📐 <strong>Variables</strong> — <code>{dbname}</code>, <code>{user}</code>, <code>{company}</code></li>
+                <li>🔄 <strong>Multi-line text</strong> — one line per row</li>
+                <li>🛡️ <strong>Bundler-proof</strong> — no odoo.define, no OWL, no jQuery</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h3>Configuration</h3>
+        <p>
+            Activate <strong>debug mode</strong>, then open
+            <strong>Settings → Technical → Ribbon</strong> (administrators only)
+            to configure text, colors, opacity and preview the result in real time.
+        </p>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h3>Text Variables</h3>
+        <table class="table table-sm" style="max-width: 500px;">
+            <thead><tr><th>Variable</th><th>Replaced with</th></tr></thead>
+            <tbody>
+                <tr><td><code>{dbname}</code></td><td>Database / instance name</td></tr>
+                <tr><td><code>{user}</code></td><td>Current user's display name</td></tr>
+                <tr><td><code>{company}</code></td><td>Current company's name</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h3>System Parameters (advanced)</h3>
+        <p>You can also edit raw values via <em>Settings → Technical → Parameters → System Parameters</em>:</p>
+        <table class="table table-sm">
+            <thead><tr><th>Parameter</th><th>Description</th><th>Example</th></tr></thead>
+            <tbody>
+                <tr><td><code>pns_ribbon.html</code></td><td>Ribbon text</td><td><code>TEST&lt;br&gt;{dbname}</code></td></tr>
+                <tr><td><code>pns_ribbon.textColor</code></td><td>Text color</td><td><code>rgba(255, 255, 255, 1)</code></td></tr>
+                <tr><td><code>pns_ribbon.backgroundColor</code></td><td>Background color</td><td><code>rgba(255, 0, 0, 0.5)</code></td></tr>
+                <tr><td><code>pns_ribbon.enabled</code></td><td>Master switch (0 = hidden)</td><td><code>1</code></td></tr>
+                <tr><td><code>pns_ribbon.shadow</code></td><td>Drop shadow (0 = flat)</td><td><code>1</code></td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h3>Architecture</h3>
+        <p>
+            The ribbon is <strong>version-agnostic by design</strong>: it inherits
+            <code>web.layout</code> and injects a <code>&lt;script&gt;</code> +
+            <code>&lt;link&gt;</code> directly into the <code>&lt;head&gt;</code>,
+            bypassing the Odoo asset bundler. The only version-specific piece is the
+            color picker widget in the configuration form (OWL1 for Odoo 13–14, OWL2
+            for Odoo 15–19+).
+        </p>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced" style="text-align: center; padding: 16px 0;">
+        <p class="text-muted" style="font-size: 13px;">
+            Apache License 2.0 — © 2025 PATANEGRA Soft
+        </p>
+    </div>
+</section>
