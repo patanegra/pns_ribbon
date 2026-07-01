@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Universal compatibility (Odoo 14-19+).
+         Inherits ``web.layout`` (present in every Odoo version) and injects
+         resources directly into ``<head>``, bypassing the asset bundler. -->
+    <template id="pns_ribbon_assets" inherit_id="web.layout">
+        <xpath expr="//head" position="inside">
+            <script type="text/javascript">
+                window.pns_ribbon_data = {
+                    'db': `<t t-esc="request.env.cr.dbname if request else ''"/>`,
+                    'user': `<t t-esc="request.env.user.name if request and request.env.user else ''"/>`,
+                    'company': `<t t-esc="request.env.company.name if request and request.env.company else ''"/>`,
+                    'html': `<t t-esc="request.env['ir.config_parameter'].sudo().get_param('pns_ribbon.html', '') if request else ''"/>`,
+                    'color': `<t t-esc="request.env['ir.config_parameter'].sudo().get_param('pns_ribbon.textColor', '') if request else ''"/>`,
+                    'background': `<t t-esc="request.env['ir.config_parameter'].sudo().get_param('pns_ribbon.backgroundColor', '') if request else ''"/>`,
+                    'enabled': `<t t-esc="request.env['ir.config_parameter'].sudo().get_param('pns_ribbon.enabled', '1') if request else '1'"/>`,
+                    'shadow': `<t t-esc="request.env['ir.config_parameter'].sudo().get_param('pns_ribbon.shadow', '1') if request else '1'"/>`
+                };
+            </script>
+            <!-- Cache-busting by module version: since these statics bypass
+                 the Odoo asset bundler, we append ``?v=<version>`` so the
+                 browser reloads ribbon.js / ribbon.css after each upgrade. -->
+            <t t-set="pns_rb_ver" t-value="request.env['ir.module.module'].sudo().search([('name', '=', 'pns_ribbon')], limit=1).latest_version if request else ''"/>
+            <link rel="stylesheet" type="text/css" t-att-href="'/pns_ribbon/static/src/css/ribbon.css?v=' + (pns_rb_ver or '0')"/>
+            <script type="text/javascript" t-att-src="'/pns_ribbon/static/src/js/ribbon.js?v=' + (pns_rb_ver or '0')"></script>
+        </xpath>
+    </template>
+
+    <!-- Legacy widgets (Odoo 13-14) in backend assets for the config form. -->
+    <template id="pns_ribbon_backend_assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/pns_ribbon/static/src/js/pns_color_field_v14.js"></script>
+            <script type="text/javascript" src="/pns_ribbon/static/src/js/pns_ribbon_history_v14.js"></script>
+        </xpath>
+    </template>
+</odoo>
