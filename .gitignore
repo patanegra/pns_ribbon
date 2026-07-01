@@ -1,0 +1,11 @@
+docs/_oldversions
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Local virtualenv
+.venv/
+.last_odoo_test.log
