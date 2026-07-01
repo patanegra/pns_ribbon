@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="pns_ribbon.PnsRibbonHistory">
+        <div class="o_field_pns_ribbon_history d-flex flex-wrap gap-2">
+            <t t-foreach="state.entries" t-as="entry" t-key="entry_index">
+                <div class="pns_ribbon_hist_item position-relative"
+                     style="cursor:pointer;margin-top:8px;"
+                     title="Click to reuse"
+                     t-on-click="() => this.apply(entry)">
+                    <span class="pns_ribbon_hist_del"
+                          title="Remove"
+                          style="position:absolute;top:-7px;right:-7px;width:16px;height:16px;line-height:14px;text-align:center;border-radius:50%;background:#fff;border:1px solid #888;color:#444;font-size:11px;"
+                          t-on-click="(ev) => this.remove(entry, ev)">×</span>
+                    <div t-attf-style="padding:6px 12px;border-radius:4px;font-weight:bold;text-align:center;min-width:110px;color:{{entry.fg}};background:{{entry.bg}};">
+                        <t t-esc="entry.text"/>
+                    </div>
+                </div>
+            </t>
+            <div t-if="!state.entries.length" class="text-muted">—</div>
+        </div>
+    </t>
+</templates>
