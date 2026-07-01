@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Version-proof configuration form (plain wizard).
+         A flat form (no Settings container that changes between versions). -->
+    <record id="pns_ribbon_config_form" model="ir.ui.view">
+        <field name="name">pns.ribbon.config.form</field>
+        <field name="model">pns.ribbon.config</field>
+        <field name="arch" type="xml">
+            <form string="Ribbon">
+                <sheet>
+                    <group>
+                        <group string="Text">
+                            <field name="ribbon_text" placeholder="TEST&#10;{dbname}"/>
+                        </group>
+                        <group string="Colors">
+                            <field name="text_color" widget="pns_color"/>
+                            <field name="bg_color" widget="pns_color"/>
+                        </group>
+                        <group string="Options">
+                            <field name="enabled"/>
+                            <field name="shadow"/>
+                        </group>
+                    </group>
+                    <field name="help_html" nolabel="1"/>
+                    <group string="Preview">
+                        <field name="preview" nolabel="1"/>
+                    </group>
+                    <separator string="Recent (one click to reuse)"/>
+                    <field name="history_json" widget="pns_ribbon_history" nolabel="1"/>
+                </sheet>
+                <footer>
+                    <button name="action_save" type="object" string="Save" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pns_ribbon_config" model="ir.actions.act_window">
+        <field name="name">Ribbon</field>
+        <field name="res_model">pns.ribbon.config</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Discreet placement: inside Settings > Technical, at the bottom
+         (high sequence) alongside other technical utilities. -->
+    <menuitem id="menu_pns_ribbon_config"
+              name="Ribbon"
+              parent="base.menu_custom"
+              action="action_pns_ribbon_config"
+              groups="base.group_system"
+              sequence="900"/>
+</odoo>
